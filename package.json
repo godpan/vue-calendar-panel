@@ -1,9 +1,8 @@
 {
   "name": "vue-calendar-panel",
   "description": "a calendar panel for vue.js",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "author": "godpan <nubug@dripower.com>",
-  "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
@@ -23,5 +22,19 @@
     "vue-template-compiler": "^2.4.4",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/godpan/vue-calendar-panel.git"
+  },
+  "keywords": [
+    "vue",
+    "calendar"
+  ],
+  "author": "godpan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/godpan/vue-calendar-panel/issues"
+  },
+  "homepage": "https://github.com/godpan/vue-calendar-panel#readme"
 }
