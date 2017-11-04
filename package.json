@@ -1,7 +1,7 @@
 {
   "name": "vue-calendar-panel",
   "description": "a calendar panel for vue.js",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "author": "godpan <nubug@dripower.com>",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
