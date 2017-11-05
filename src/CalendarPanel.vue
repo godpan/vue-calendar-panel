@@ -2,12 +2,18 @@
   <div id="app" class="vue-calendar-panel">
     <panel-header 
       :locale="locale" 
-      :currentMonth="currentMonth"
+      :currentMonth="curMonth"
+      :stylePattern="stylePattern"
+      :monthFormat="monthFormat"
       @changeMonth="changeMonth"></panel-header>
     <panel-body 
       :locale="locale"
       :currentDates="currentDates"
       :selectedDays="selectedDays"
+      :needRemark="needRemark"
+      :onlyMonth="onlyMonth"
+      :title="title"
+      :leftArrow="leftArrow"
       @changeDay="changeDay"></panel-body>
   </div>
 </template>
@@ -34,12 +40,50 @@ export default {
     },
     mode: {
       type : String,
-      default : 'multi'
+      default : 'single'
+    },
+    title: {
+      type : String,
+      default : '备注'
+    },
+    onlyMonth: {
+      type : Boolean,
+      default : true
+    },
+    needRemark: {
+      type : Boolean,
+      default : false
+    },
+    leftArrow: {
+      type: String,
+      default: "<"
+    },
+    rightArrow: {
+      type: String,
+      default: ">"
+    },
+    currentMonth: {
+      type: Object,
+      default: function () {
+        return moment().startOf('month')
+      }
+    },
+    locale: {
+      type: String,
+      default: 'en'
+    },
+    monthFormat: {
+      type: String,
+      default: 'YYYY年MM月'
+    },
+    stylePattern: {
+      type: String,
+      default: 'right'
     }
   },
   data () {
     return {
-      currentMonth: moment().startOf('month'),
+      curMonth: null,
       selectedDays: null,
       modeSingle: 'single',
       modeMulti: 'multi'
@@ -52,10 +96,11 @@ export default {
   },
   mounted () {
     this.selectedDays = this.defaultDays
+    this.curMonth = this.currentMonth
   },
   methods: {
     changeMonth (val) {
-      this.currentMonth = val
+      this.curMonth = val
     },
     changeDay (val) {
       if (this.mode == this.modeSingle) {
@@ -76,7 +121,7 @@ export default {
       }
     },
     getCalendar () {
-      let monthViewStartDate = DateUtil.getMonthViewStartDate(this.currentMonth, this.firstDay);
+      let monthViewStartDate = DateUtil.getMonthViewStartDate(this.curMonth, this.firstDay);
       let calendar = [];
       for(let perWeek = 0 ; perWeek < 6 ; perWeek++) {
         let week = [];
@@ -85,7 +130,7 @@ export default {
             day : monthViewStartDate.format('YYYY-MM-DD'),
             monthDay : monthViewStartDate.date(),
             isToday : monthViewStartDate.isSame(moment(), 'day'),
-            isCurMonth : monthViewStartDate.isSame(this.currentMonth, 'month'),
+            isCurMonth : monthViewStartDate.isSame(this.curMonth, 'month'),
             weekDay : perDay,
             date : moment(monthViewStartDate)
           });

@@ -77,7 +77,7 @@ export default {
     },
     needRemark: {
       type : Boolean,
-      default : true
+      default : false
     }
   },
   methods: {
